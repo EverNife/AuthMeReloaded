@@ -65,7 +65,7 @@ public class ProcessSyncPlayerLogout implements SynchronousProcess {
         ConsoleLogger.info(player.getName() + " logged out");
 
         //At the end, just in case :V
-        FCAuthMeAPI.getRUPlayerData(player.getName()).setQuitLocation(player.getLocation());
+        FCAuthMeAPI.getAuthPlayerData(player.getName()).performePlayerQuit();
     }
 
     private void applyLogoutEffect(Player player) {

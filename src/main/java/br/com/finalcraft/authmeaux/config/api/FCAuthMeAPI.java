@@ -9,16 +9,16 @@ import org.bukkit.entity.Player;
 
 public class FCAuthMeAPI {
 
-    public static AuthPlayerData getRUPlayerData(PlayerData playerData){
+    public static AuthPlayerData getAuthPlayerData(PlayerData playerData){
         return AuthPlayerData.getOrCreateAuthPlayerData(playerData);
     }
 
-    public static AuthPlayerData getRUPlayerData(OfflinePlayer player){
-        return getRUPlayerData(player.getName());
+    public static AuthPlayerData getAuthPlayerData(OfflinePlayer player){
+        return getAuthPlayerData(player.getName());
     }
 
-    public static AuthPlayerData getRUPlayerData(String playerName){
-        return getRUPlayerData(PlayerController.getPlayerData(playerName));
+    public static AuthPlayerData getAuthPlayerData(String playerName){
+        return getAuthPlayerData(PlayerController.getPlayerData(playerName));
     }
 
     public static Location getPlayerQuitLocation(Player player){

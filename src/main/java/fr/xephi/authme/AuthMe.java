@@ -1,6 +1,7 @@
 package fr.xephi.authme;
 
 import br.com.finalcraft.authmeaux.config.ConfigManager;
+import br.com.finalcraft.authmeaux.config.listeners.PlayerListenerAuthme;
 import ch.jalu.injector.Injector;
 import ch.jalu.injector.InjectorBuilder;
 import com.google.common.annotations.VisibleForTesting;
@@ -274,6 +275,11 @@ public class AuthMe extends JavaPlugin {
         pluginManager.registerEvents(injector.getSingleton(BlockListener.class), this);
         pluginManager.registerEvents(injector.getSingleton(EntityListener.class), this);
         pluginManager.registerEvents(injector.getSingleton(ServerListener.class), this);
+
+        // Try to register EverNife's player listeners
+        if (isClassLoaded("br.com.finalcraft.evernifecore.EverNifeCore")){
+            PlayerListenerAuthme.registerIfPossible(this);
+        }
 
         // Try to register 1.6 player listeners
         if (isClassLoaded("org.bukkit.event.player.PlayerEditBookEvent")) {

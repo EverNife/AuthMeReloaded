@@ -71,11 +71,10 @@ public class AsynchronousQuit implements AsynchronousProcess {
         }
         final String name = player.getName().toLowerCase();
         final boolean wasLoggedIn = playerCache.isAuthenticated(name);
-        Location loc = player.getLocation();
 
         if (wasLoggedIn) {
             if (service.getProperty(RestrictionSettings.SAVE_QUIT_LOCATION)) {
-                loc = spawnLoader.getPlayerLocationOrSpawn(player);
+                Location loc = spawnLoader.getPlayerLocationOrSpawn(player);
                 PlayerAuth auth = PlayerAuth.builder()
                     .name(name).location(loc)
                     .realName(player.getName()).build();
@@ -111,10 +110,6 @@ public class AsynchronousQuit implements AsynchronousProcess {
 
         // remove player from cache
         database.invalidateCache(name);
-
-        if (wasLoggedIn){ //At the end, just in case :V
-            FCAuthMeAPI.getRUPlayerData(name).setQuitLocation(loc);
-        }
     }
 
 }
