@@ -163,8 +163,12 @@ public class PlayerListener implements Listener {
         if (playerQuitLocation != null
             && playerQuitLocation.getWorld() != null
             && playerQuitLocation.distance(player.getLocation()) > settings.getProperty(ALLOWED_MOVEMENT_RADIUS)){
-            if (!player.getAllowFlight()) player.setAllowFlight(true);
-            if (!player.isFlying()) player.setFlying(true);
+
+            if (player.getLocation().getY() < playerQuitLocation.getY()){
+                if (!player.getAllowFlight()) player.setAllowFlight(true);
+                if (!player.isFlying()) player.setFlying(true);
+            }
+
             player.teleport(playerQuitLocation);
             return;
         }
@@ -323,7 +327,6 @@ public class PlayerListener implements Listener {
         }
 
         management.performQuit(player);
-        FCAuthMeAPI.getAuthPlayerData(player).performePlayerQuit();
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
