@@ -1,5 +1,6 @@
 package fr.xephi.authme.command.executable.authme;
 
+import br.com.finalcraft.authmeaux.config.ConfigManager;
 import fr.xephi.authme.AuthMe;
 import fr.xephi.authme.ConsoleLogger;
 import fr.xephi.authme.command.ExecutableCommand;
@@ -48,6 +49,7 @@ public class ReloadCommand implements ExecutableCommand {
     public void executeCommand(CommandSender sender, List<String> arguments) {
         try {
             settings.reload();
+            ConfigManager.initialize(plugin);
             ConsoleLogger.setLoggingOptions(settings);
             settingsWarner.logWarningsForMisconfigurations();
 

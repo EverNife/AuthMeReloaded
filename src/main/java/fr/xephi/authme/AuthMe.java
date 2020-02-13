@@ -1,5 +1,6 @@
 package fr.xephi.authme;
 
+import br.com.finalcraft.authmeaux.config.ConfigManager;
 import ch.jalu.injector.Injector;
 import ch.jalu.injector.InjectorBuilder;
 import com.google.common.annotations.VisibleForTesting;
@@ -235,6 +236,9 @@ public class AuthMe extends JavaPlugin {
         // Start Email recall task if needed
         OnStartupTasks onStartupTasks = injector.newInstance(OnStartupTasks.class);
         onStartupTasks.scheduleRecallEmailTask();
+
+        // FinalCraft Config Helper
+        ConfigManager.initialize(this);
     }
 
     /**

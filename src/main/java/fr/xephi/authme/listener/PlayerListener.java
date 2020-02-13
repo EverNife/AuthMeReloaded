@@ -1,5 +1,6 @@
 package fr.xephi.authme.listener;
 
+import br.com.finalcraft.authmeaux.config.api.FCAuthMeAPI;
 import fr.xephi.authme.data.auth.PlayerAuth;
 import fr.xephi.authme.datasource.DataSource;
 import fr.xephi.authme.message.MessageKey;
@@ -132,13 +133,13 @@ public class PlayerListener implements Listener {
 
         /*
          * Limit player X and Z movements to 1 block
-         * Deny player Y+ movements (allows falling)
+         * Deny player Y+ movements (!allows falling)
          */
         Location from = event.getFrom();
         Location to = event.getTo();
         if (from.getBlockX() == to.getBlockX()
             && from.getBlockZ() == to.getBlockZ()
-            && from.getY() - to.getY() >= 0) {
+            && from.getY() == to.getY()) {
             return;
         }
 
@@ -154,6 +155,15 @@ public class PlayerListener implements Listener {
         }
 
         if (settings.getProperty(RestrictionSettings.NO_TELEPORT)) {
+            return;
+        }
+
+        Location playerQuitLocation = FCAuthMeAPI.getPlayerQuitLocation(player);
+
+        if (playerQuitLocation != null
+            && playerQuitLocation.getWorld() != null
+            && playerQuitLocation.distance(player.getLocation()) > settings.getProperty(ALLOWED_MOVEMENT_RADIUS)){
+            player.teleport(playerQuitLocation);
             return;
         }
 

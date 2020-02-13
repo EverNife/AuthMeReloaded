@@ -1,5 +1,6 @@
 package fr.xephi.authme.process.logout;
 
+import br.com.finalcraft.authmeaux.config.api.FCAuthMeAPI;
 import fr.xephi.authme.ConsoleLogger;
 import fr.xephi.authme.data.limbo.LimboService;
 import fr.xephi.authme.events.LogoutEvent;
@@ -62,6 +63,9 @@ public class ProcessSyncPlayerLogout implements SynchronousProcess {
 
         service.send(player, MessageKey.LOGOUT_SUCCESS);
         ConsoleLogger.info(player.getName() + " logged out");
+
+        //At the end, just in case :V
+        FCAuthMeAPI.getRUPlayerData(player.getName()).setQuitLocation(player.getLocation());
     }
 
     private void applyLogoutEffect(Player player) {

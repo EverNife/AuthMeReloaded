@@ -3,13 +3,10 @@ package fr.xephi.authme.permission;
 import fr.xephi.authme.ConsoleLogger;
 import fr.xephi.authme.initialization.Reloadable;
 import fr.xephi.authme.listener.JoiningPlayer;
-import fr.xephi.authme.permission.handlers.BPermissionsHandler;
 import fr.xephi.authme.permission.handlers.LuckPermsHandler;
 import fr.xephi.authme.permission.handlers.PermissionHandler;
 import fr.xephi.authme.permission.handlers.PermissionHandlerException;
-import fr.xephi.authme.permission.handlers.PermissionsExHandler;
 import fr.xephi.authme.permission.handlers.VaultHandler;
-import fr.xephi.authme.permission.handlers.ZPermissionsHandler;
 import fr.xephi.authme.settings.Settings;
 import fr.xephi.authme.settings.properties.PluginSettings;
 import fr.xephi.authme.util.StringUtils;
@@ -135,14 +132,8 @@ public class PermissionsManager implements Reloadable {
         switch (type) {
             case LUCK_PERMS:
                 return new LuckPermsHandler();
-            case PERMISSIONS_EX:
-                return new PermissionsExHandler();
-            case Z_PERMISSIONS:
-                return new ZPermissionsHandler();
             case VAULT:
                 return new VaultHandler(server);
-            case B_PERMISSIONS:
-                return new BPermissionsHandler();
             default:
                 throw new IllegalStateException("Unhandled permission type '" + type + "'");
         }
