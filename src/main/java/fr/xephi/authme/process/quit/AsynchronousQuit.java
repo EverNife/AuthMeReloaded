@@ -81,12 +81,6 @@ public class AsynchronousQuit implements AsynchronousProcess {
                 database.updateQuitLoc(auth);
             }
 
-            try {
-                FCAuthMeAPI.getAuthPlayerData(player).performePlayerQuit();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
             final String ip = PlayerUtils.getPlayerIp(player);
             PlayerAuth auth = PlayerAuth.builder()
                 .name(name)

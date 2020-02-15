@@ -30,34 +30,24 @@ public class PlayerListenerAuthme implements Listener {
 
         AuthPlayerData authPlayerData = FCAuthMeAPI.getAuthPlayerData(player);
 
-        if (authPlayerData.wasFlying()){
-            if (!player.isFlying()) player.setFlying(true);
-        }else {
-            if (player.isFlying()) player.setFlying(false);
+        if (player.getAllowFlight() != authPlayerData.wasAllowFlight()){
+            player.setAllowFlight(authPlayerData.wasAllowFlight());
         }
-
-        if (authPlayerData.wasAllowFlight()){
-            if (!player.getAllowFlight()) player.setAllowFlight(true);
-        }else {
-            if (player.getAllowFlight()) player.setAllowFlight(false);
+        if (player.isFlying() != authPlayerData.wasFlying()){
+            player.setAllowFlight(authPlayerData.wasAllowFlight());
         }
 
         authPlayerData.setQuitLocation(null);
-
         //Do the check once again because this is minecraft!
         new BukkitRunnable(){
             @Override
             public void run() {
                 if (player.isOnline()){
-                    if (authPlayerData.wasFlying()){
-                        if (!player.isFlying()) player.setFlying(true);
-                    }else {
-                        if (player.isFlying()) player.setFlying(false);
+                    if (player.getAllowFlight() != authPlayerData.wasAllowFlight()){
+                        player.setAllowFlight(authPlayerData.wasAllowFlight());
                     }
-                    if (authPlayerData.wasAllowFlight()){
-                        if (!player.getAllowFlight()) player.setAllowFlight(true);
-                    }else {
-                        if (player.getAllowFlight()) player.setAllowFlight(false);
+                    if (player.isFlying() != authPlayerData.wasFlying()){
+                        player.setAllowFlight(authPlayerData.wasAllowFlight());
                     }
                 }
             }
