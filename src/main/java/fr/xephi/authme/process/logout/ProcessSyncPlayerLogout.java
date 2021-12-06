@@ -1,6 +1,5 @@
 package fr.xephi.authme.process.logout;
 
-import br.com.finalcraft.authmeaux.config.api.FCAuthMeAPI;
 import fr.xephi.authme.ConsoleLogger;
 import fr.xephi.authme.data.limbo.LimboService;
 import fr.xephi.authme.events.LogoutEvent;
