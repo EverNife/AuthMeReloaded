@@ -288,11 +288,12 @@
             <url>http://ci.xephi.fr/plugin/repository/everything/</url>
         </repository>
 
-        <!-- bStats Repo -->
+        <!-- Petrus.dev Repo -->
         <repository>
-            <id>bstats-repo</id>
-            <url>http://repo.bstats.org/content/groups/public</url>
+            <id>petrus-dev</id>
+            <url>https://maven.petrus.dev/public</url>
         </repository>
+
     </repositories>
 
     <dependencies>
@@ -302,9 +303,8 @@
         <dependency>
             <groupId>br.com.finalcraft</groupId>
             <artifactId>EverNifeCore</artifactId>
-            <version>1.3.3</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/EverNifeCore-1.3.3a.jar</systemPath>
+            <version>2.0.1</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Jalu Injector -->
@@ -444,8 +444,7 @@
         <dependency>
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
-            <version>1.2</version>
-            <scope>compile</scope>
+            <version>2.2.1</version>
             <optional>true</optional>
         </dependency>
 
