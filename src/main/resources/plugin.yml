@@ -25,7 +25,6 @@ commands:
     description: Login command
     usage: /login <password>
     aliases:
-    - l
     - log
   logout:
     description: Logout command
