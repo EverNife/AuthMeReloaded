@@ -1,6 +1,5 @@
 package fr.xephi.authme.process.quit;
 
-import br.com.finalcraft.authmeaux.config.api.FCAuthMeAPI;
 import fr.xephi.authme.AuthMe;
 import fr.xephi.authme.data.VerificationCodeManager;
 import fr.xephi.authme.data.auth.PlayerAuth;
@@ -66,7 +65,7 @@ public class AsynchronousQuit implements AsynchronousProcess {
      * @param player the player who left
      */
     public void processQuit(Player player) {
-        if (player == null || validationService.isUnrestricted(player.getName())) {
+        if (player == null || validationService.isUnrestricted(player.getName()) || validationService.isFakePlayer(player)) {
             return;
         }
         final String name = player.getName().toLowerCase();

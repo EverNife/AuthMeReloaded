@@ -1,5 +1,7 @@
 package fr.xephi.authme.service;
 
+import br.com.finalcraft.authmeaux.EverNifeCoreIntegration;
+import br.com.finalcraft.evernifecore.nms.util.NMSUtils;
 import ch.jalu.configme.properties.Property;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -141,6 +143,19 @@ public class ValidationService implements Reloadable {
      */
     public boolean isUnrestricted(String name) {
         return unrestrictedNames.contains(name.toLowerCase());
+    }
+
+    /**
+     * Checks if the name is unrestricted according to the configured settings.
+     *
+     * @param player the player to verify
+     * @return true if unrestricted, false otherwise
+     */
+    public boolean isFakePlayer(Player player) {
+        if (EverNifeCoreIntegration.isEnabled()){
+            return NMSUtils.get().isFakePlayer(player);
+        }
+        return false;
     }
 
     /**

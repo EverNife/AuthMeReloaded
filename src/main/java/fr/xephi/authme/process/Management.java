@@ -1,6 +1,5 @@
 package fr.xephi.authme.process;
 
-import br.com.finalcraft.authmeaux.config.api.FCAuthMeAPI;
 import fr.xephi.authme.process.changepassword.AsyncChangePassword;
 import fr.xephi.authme.process.email.AsyncAddEmail;
 import fr.xephi.authme.process.email.AsyncChangeEmail;
@@ -13,7 +12,6 @@ import fr.xephi.authme.process.register.executors.RegistrationMethod;
 import fr.xephi.authme.process.register.executors.RegistrationParameters;
 import fr.xephi.authme.process.unregister.AsynchronousUnregister;
 import fr.xephi.authme.service.BukkitService;
-import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -60,11 +58,6 @@ public class Management {
     }
 
     public void performLogout(Player player) {
-        try {
-            FCAuthMeAPI.getAuthPlayerData(player.getName()).performePlayerQuit();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
         runTask(() -> asynchronousLogout.logout(player));
     }
 

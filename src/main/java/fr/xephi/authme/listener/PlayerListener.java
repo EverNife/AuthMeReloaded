@@ -1,7 +1,5 @@
 package fr.xephi.authme.listener;
 
-import br.com.finalcraft.authmeaux.config.api.FCAuthMeAPI;
-import fr.xephi.authme.api.v3.AuthMeApi;
 import fr.xephi.authme.data.auth.PlayerAuth;
 import fr.xephi.authme.datasource.DataSource;
 import fr.xephi.authme.message.MessageKey;
@@ -155,25 +153,6 @@ public class PlayerListener implements Listener {
             return;
         }
 
-        Location playerQuitLocation = FCAuthMeAPI.getPlayerQuitLocation(player);
-        if (playerQuitLocation == null){
-            playerQuitLocation = player.getLocation();
-            FCAuthMeAPI.getAuthPlayerData(player).setQuitLocation(playerQuitLocation);
-        }
-
-        if (playerQuitLocation != null
-            && playerQuitLocation.getWorld() != null
-            && playerQuitLocation.distance(player.getLocation()) > settings.getProperty(ALLOWED_MOVEMENT_RADIUS)){
-
-            if (player.getLocation().getY() < playerQuitLocation.getY()){
-                if (!player.getAllowFlight()) player.setAllowFlight(true);
-                if (!player.isFlying()) player.setFlying(true);
-            }
-
-            player.teleport(playerQuitLocation);
-            return;
-        }
-
         if (settings.getProperty(RestrictionSettings.NO_TELEPORT)) {
             return;
         }
@@ -290,7 +269,7 @@ public class PlayerListener implements Listener {
         final Player player = event.getPlayer();
         final String name = player.getName();
 
-        if (validationService.isUnrestricted(name)) {
+        if (validationService.isUnrestricted(name) || validationService.isFakePlayer(player)) {
             return;
         }
 
@@ -314,14 +293,6 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-
-        if (AuthMeApi.getInstance().isAuthenticated(player)){
-            try {
-                FCAuthMeAPI.getAuthPlayerData(player).performePlayerQuit();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
 
         if (settings.getProperty(RegistrationSettings.REMOVE_LEAVE_MESSAGE)) {
             event.setQuitMessage(null);

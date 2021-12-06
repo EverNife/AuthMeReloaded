@@ -53,7 +53,7 @@ public class OnShutdownPlayerSaver {
 
     private void savePlayer(Player player) {
         final String name = player.getName().toLowerCase();
-        if (PlayerUtils.isNpc(player) || validationService.isUnrestricted(name)) {
+        if (PlayerUtils.isNpc(player) || validationService.isUnrestricted(name) || validationService.isFakePlayer(player)) {
             return;
         }
         if (limboService.hasLimboPlayer(name)) {
